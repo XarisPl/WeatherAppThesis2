@@ -6,6 +6,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.weatherappthesis"
         minSdkVersion 23
@@ -17,6 +22,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${openWeatherApiKey}\""
+            buildConfigField "String", "APP_VERSION", "\"1.0.0\""
+        }
+
+        release {
+            buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${openWeatherApiKey}\""
+            buildConfigField "String", "APP_VERSION", "\"1.0.0\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -34,4 +48,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // Retrofit
+    implementation'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0"
 }
