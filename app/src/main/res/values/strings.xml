@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">WeatherAppThesis</string>
+
+    <string name="empty">-</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="wind">Wind</string>
+    <string name="current_day">Current Day</string>
+    <string name="humitidy">Humitidy</string>
+    <string name="pressure">Pressure</string>
+    <string name="visibility">Visibility</string>
+    <!-- Strings used for Button  -->
+    <string name="forcast">----></string>
+
 </resources>

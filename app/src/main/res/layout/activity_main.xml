@@ -6,13 +6,238 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+<!--    <Spinner-->
+<!--        android:id="@+id/sp_country_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:entries="@array/city_list"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="50dp"
+        android:text="@string/location"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_3hrs_forcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forcast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/empty"
+        android:textSize="100sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_curruent_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/current_day"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tempmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tempmax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_tempmin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_sunrise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50sp"
+        android:gravity="center"
+        android:text="@string/sunrise"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_sunset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_curruent_day" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sunrise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_sunset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/t_sunrise" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_sunset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/sunset"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/t_sunrise"
+        app:layout_constraintTop_toBottomOf="@id/tv_curruent_day" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sunset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_sunrise"
+        app:layout_constraintTop_toBottomOf="@id/t_sunset" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_wind"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/wind"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toStartOf="@id/t_humidity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sunrise" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_wind"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_humidity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/t_wind" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_humidity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/humitidy"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/t_wind"
+        app:layout_constraintTop_toBottomOf="@id/tv_sunset" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_humidity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_wind"
+        app:layout_constraintTop_toBottomOf="@id/t_humidity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_pressure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/pressure"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toStartOf="@id/t_visibility"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_wind" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_pressure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_visibility"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/t_pressure" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/t_visibility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/visibility"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/t_pressure"
+        app:layout_constraintTop_toBottomOf="@id/tv_humidity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_visibility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_pressure"
+        app:layout_constraintTop_toBottomOf="@id/t_visibility" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
