@@ -102,6 +102,6 @@ class MainActivity : AppCompatActivity() {
         tv_description.text = data?.weather?.description.toString()
         tv_location.text = data?.location.toString()
         tv_visibility.text = data?.visibility.toString()
+    }
 
-
-}}
+}
