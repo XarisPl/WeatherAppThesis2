@@ -34,9 +34,9 @@ class Sys {
     @SerializedName("country")
     var country: String? = null
     @SerializedName("sunrise")
-    var sunrise: String? = null
+    var sunrise: Int? = null
     @SerializedName("sunset")
-    var sunset: String? = null
+    var sunset: Int? = null
 }
 
 class Wind {
