@@ -2,6 +2,7 @@ package com.example.weatherappthesis
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.weatherappthesis.model.WeatherResponse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
