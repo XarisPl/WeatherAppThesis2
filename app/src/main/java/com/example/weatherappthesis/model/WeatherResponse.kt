@@ -10,7 +10,7 @@ class WeatherResponse {
     @SerializedName("wind")
     var wind: Wind? = null
     @SerializedName("weather")
-    var weather: Weather? = null
+    var weather: List<Weather>? = null
     @SerializedName("name")
     var location: String? = null
     @SerializedName("visibility")
@@ -49,6 +49,8 @@ class Wind {
 class Weather {
     @SerializedName("description")
     var description: String? = null
+    @SerializedName("icon")
+    var icon: String? = null
 }
 
 

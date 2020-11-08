@@ -7,6 +7,7 @@ import com.example.weatherappthesis.model.WeatherResponse
 
 class MainViewModel : ViewModel() {
 
+    private var cachedData: WeatherResponse? = null
     private val _weatherResponse = MediatorLiveData<ApiResponse<WeatherResponse>>()
     val weatherResponse: LiveData<ApiResponse<WeatherResponse>> = _weatherResponse
 
@@ -32,4 +33,10 @@ class MainViewModel : ViewModel() {
         }
 
     }
+
+    fun cacheData(data: WeatherResponse?) {
+        cachedData = data
+    }
+
+    fun fetchData() = cachedData
 }
