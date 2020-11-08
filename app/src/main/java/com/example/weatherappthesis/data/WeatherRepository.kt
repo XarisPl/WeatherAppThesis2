@@ -51,7 +51,7 @@ class WeatherRepository(private val api: OpenWeatherApi) {
         val result = MutableLiveData<ApiResponse<WeatherResponse>>()
         GlobalScope.launch {
             try {
-                val apiResponse = api.getWeatherInfoByCityName(cityName, BuildConfig.OPEN_WEATHER_API_KEY).awaitResponse()
+                val apiResponse = api.getWeatherInfoByCityName(cityName, BuildConfig.OPEN_WEATHER_API_KEY, "metric").awaitResponse()
                 when (apiResponse.code()) {
                     HTTP_STATUS_OK, HTTP_STATUS_CREATED -> {
                         result.postValue(
