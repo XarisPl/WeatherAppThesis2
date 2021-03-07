@@ -1,16 +1,16 @@
-package com.example.weatherappthesis
+package com.example.weatherappthesis.network
 
+import com.example.weatherappthesis.ApiInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class OpenWeatherApiManager {
-
+class StormGlassApiManager {
     companion object {
-        private const val URL = "https://api.openweathermap.org/data/2.5/"
+        private const val URL = "https://api.stormglass.io/v2/"
     }
 
-    fun getService(): OpenWeatherApi {
+    fun getService(): StormGlassApi {
         val client = OkHttpClient().newBuilder()
             .addInterceptor(ApiInterceptor())
             .build()
@@ -21,7 +21,6 @@ class OpenWeatherApiManager {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(OpenWeatherApi::class.java)
+        return retrofit.create(StormGlassApi::class.java)
     }
-
 }

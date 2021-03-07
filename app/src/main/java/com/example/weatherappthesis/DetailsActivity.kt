@@ -8,13 +8,17 @@ import com.example.weatherappthesis.Constants.Companion.WEATHER_SUNRISE
 import com.example.weatherappthesis.Constants.Companion.WEATHER_SUNSET
 import com.example.weatherappthesis.Constants.Companion.WEATHER_VISIBILITY
 import com.example.weatherappthesis.Constants.Companion.WEATHER_WIND
-import kotlinx.android.synthetic.main.activity_details.*
+import com.example.weatherappthesis.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val sunrise = intent.getIntExtra(WEATHER_SUNRISE, 0)
         val sunset = intent.getIntExtra(WEATHER_SUNSET, 0)
@@ -35,13 +39,15 @@ class DetailsActivity : AppCompatActivity() {
         visibility: String?
     ) {
 
-       tv_sunrise.text = sunrise?.toLong()?.times(1000)?.let { java.util.Date(it).toString() }
-        tv_sunset.text = sunset?.toLong()?.times(1000)?.let { java.util.Date(it).toString() }
+        binding.tvSunrise.text = sunrise?.toLong()?.times(1000)?.let { java.util.Date(it).toString() }
+        binding.tvSunset.text = sunset?.toLong()?.times(1000)?.let { java.util.Date(it).toString() }
 
-        //κατι μου λεει πως δεν θα το κανουμε ετσι αυτο!!
-        tv_wind.text = wind
-        tv_humidity.text = humidity
-        tv_pressure.text = pressure
-        tv_visibility.text = visibility
+        binding.tvWind.text = wind
+        binding.tvHumidity.text = humidity
+        binding.tvPressure.text = pressure
+        binding.tvVisibility.text = visibility
+    }
+
+    private fun initObservers() {
     }
 }

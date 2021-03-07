@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.weatherappthesis.model.WeatherResponse
-import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 import com.example.weatherappthesis.Constants.Companion.WEATHER_HUMIDITY
@@ -22,17 +21,20 @@ import com.example.weatherappthesis.Constants.Companion.WEATHER_SUNRISE
 import com.example.weatherappthesis.Constants.Companion.WEATHER_SUNSET
 import com.example.weatherappthesis.Constants.Companion.WEATHER_VISIBILITY
 import com.example.weatherappthesis.Constants.Companion.WEATHER_WIND
+import com.example.weatherappthesis.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
 
+    private lateinit var binding: ActivityMainBinding
+
     private var locationManager: LocationManager? = null
 
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location?) {
-//            mainViewModel.fetchWeatherByLocation(location?.latitude.toString(), location?.longitude.toString())
+//            mainViewModel.fetchWeather(location?.latitude.toString(), location?.longitude.toString())
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
@@ -50,7 +52,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
@@ -87,17 +92,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        bt_3hrs_forcast.setOnClickListener {
-            val tempData = mainViewModel.fetchData()
-            val intent = Intent(this, DetailsActivity::class.java).apply {
-                putExtra(WEATHER_SUNRISE, tempData?.sys?.sunrise)
-                putExtra(WEATHER_SUNSET, tempData?.sys?.sunset)
-                putExtra(WEATHER_WIND, tempData?.wind?.speed.toString() + tempData?.wind?.deg.toString())
-                putExtra(WEATHER_HUMIDITY, tempData?.main?.humidity.toString())
-                putExtra(WEATHER_PRESSURE, tempData?.main?.pressure.toString())
-                putExtra(WEATHER_VISIBILITY, tempData?.visibility.toString())
-            }
-            if (tempData != null) startActivity(intent)
+        binding.bt3hrsForcast.setOnClickListener {
+//            val tempData = mainViewModel.fetchData()
+//            val intent = Intent(this, DetailsActivity::class.java).apply {
+//                putExtra(WEATHER_SUNRISE, tempData?.sys?.sunrise)
+//                putExtra(WEATHER_SUNSET, tempData?.sys?.sunset)
+//                putExtra(WEATHER_WIND, tempData?.wind?.speed.toString() + tempData?.wind?.deg.toString())
+//                putExtra(WEATHER_HUMIDITY, tempData?.main?.humidity.toString())
+//                putExtra(WEATHER_PRESSURE, tempData?.main?.pressure.toString())
+//                putExtra(WEATHER_VISIBILITY, tempData?.visibility.toString())
+//            }
+//            if (tempData != null) startActivity(intent)
+            mainViewModel.fetchWeather("53.4884583", "-2.2466495")
         }
     }
 
@@ -113,21 +119,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyInformationToScreen(data: WeatherResponse?) {
-        tv_location.text = data?.location.toString()
-        tv_description.text = data?.weather?.get(0)?.description
-        tv_temperature.text = data?.main?.temp?.toInt().toString() + " \u2103"
+        binding.tvLocation.text = data?.location.toString()
+        binding.tvDescription.text = data?.weather?.get(0)?.description
+        binding.tvTemperature.text = data?.main?.temp?.toInt().toString() + " \u2103"
 
         val sdf = SimpleDateFormat("EEEE")
         val dateFormat: Date? = data?.sys?.sunrise?.toLong()?.times(1000)?.let { Date(it) }
         val weekday: String = sdf.format(dateFormat)
-        tv_curruent_day.text = weekday
+        binding.tvCurruentDay.text = weekday
 
-        tv_tempmin.text = "Min: " + data?.main?.temp_min?.toInt().toString() + " \u2103"
-        tv_tempmax.text = "Max: " + data?.main?.temp_max?.toInt().toString() + " \u2103"
+        binding.tvTempmin.text = "Min: " + data?.main?.temp_min?.toInt().toString() + " \u2103"
+        binding.tvTempmax.text = "Max: " + data?.main?.temp_max?.toInt().toString() + " \u2103"
 
         Glide.with(this)
             .load("https://openweathermap.org/img/wn/" + data?.weather?.get(0)?.icon + ".png")
-            .into(iv_icon)
+            .into(binding.ivIcon)
     }
 
 }
