@@ -1,10 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
+    buildFeatures {
+        viewBinding true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -24,11 +27,13 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${openWeatherApiKey}\""
+            buildConfigField "String", "STORM_GLASS_API_KEY", "\"${stormGlassApiKey}\""
             buildConfigField "String", "APP_VERSION", "\"1.0.0\""
         }
 
         release {
             buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${openWeatherApiKey}\""
+            buildConfigField "String", "STORM_GLASS_API_KEY", "\"${stormGlassApiKey}\""
             buildConfigField "String", "APP_VERSION", "\"1.0.0\""
         }
         release {

@@ -2,6 +2,7 @@ package com.example.weatherappthesis
 
 class Constants {
     companion object {
+        const val EMPTY = ""
         const val WEATHER_SUNRISE = "weather_sunrise"
         const val WEATHER_SUNSET = "weather_sunset"
         const val WEATHER_WIND = "weather_wind"
