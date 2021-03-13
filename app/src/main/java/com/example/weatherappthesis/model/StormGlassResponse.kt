@@ -1,8 +1,12 @@
 package com.example.weatherappthesis.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-class StormGlassResponse {
+@Parcelize
+class StormGlassResponse : Parcelable {
+    var locationName: String? = null
     @SerializedName("hours")
     var hours: Collection<Hours>? = null
 }

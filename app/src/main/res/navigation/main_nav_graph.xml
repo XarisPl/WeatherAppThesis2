@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/fragment_welcome">
+
+    <action
+        android:id="@+id/action_welcome_to_locations"
+        app:destination="@id/fragment_locations"
+        app:popUpTo="@layout/fragment_welcome"/>
+
+    <fragment
+        android:id="@+id/fragment_welcome"
+        android:name="com.example.weatherappthesis.welcome.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome"/>
+
+    <fragment
+        android:id="@+id/fragment_locations"
+        android:name="com.example.weatherappthesis.location.LocationsFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_locations">
+        <action
+            android:id="@+id/action_locations_to_details"
+            app:destination="@id/fragment_details"
+            app:popUpTo="@layout/fragment_locations"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_details"
+        android:name="com.example.weatherappthesis.details.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="response"
+            app:argType="com.example.weatherappthesis.model.StormGlassResponse"/>
+        <action
+            android:id="@+id/action_details_to_forecast"
+            app:destination="@id/fragment_forecast"
+            app:popUpTo="@layout/fragment_details"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_forecast"
+        android:name="com.example.weatherappthesis.forecast.ForecastFragment"
+        android:label="ForecastFragment"
+        tools:layout="@layout/fragment_forecast"/>
+
+</navigation>

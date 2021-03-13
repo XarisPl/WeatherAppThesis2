@@ -26,14 +26,6 @@ class MainViewModel : ViewModel() {
     private val stormGlassRepository: StormGlassRepository =
         StormGlassRepository(stormGlassApi)
 
-    fun fetchWeather(lat: String, lon: String) {
-        _stormGlassResponse.addSource(
-            stormGlassRepository.getWeather(lat, lon)
-        ) {
-            _stormGlassResponse.value = it
-        }
-    }
-
     fun fetchWeatherByLocation(lat: String, lon: String) {
         _weatherResponse.addSource(
             weatherRepository.getWeatherByLocation(lat, lon)
