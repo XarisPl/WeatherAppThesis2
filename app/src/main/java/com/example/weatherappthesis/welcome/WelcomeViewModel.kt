@@ -1,8 +1,9 @@
 package com.example.weatherappthesis.welcome
 
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class WelcomeViewModel : ViewModel()  {
+class WelcomeViewModel @Inject constructor() : ViewModel()  {
 
 
 

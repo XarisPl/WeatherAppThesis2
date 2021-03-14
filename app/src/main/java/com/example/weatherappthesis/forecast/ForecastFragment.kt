@@ -4,12 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherappthesis.databinding.FragmentForecastBinding
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class ForecastFragment : Fragment() {
+class ForecastFragment : DaggerFragment(), HasAndroidInjector {
 
-    private lateinit var forecastViewModel: ForecastViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = fragmentInjector
+
+    private val forecastViewModel: ForecastViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(ForecastViewModel::class.java)
+    }
 
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
@@ -26,12 +40,11 @@ class ForecastFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        forecastViewModel = ForecastViewModel()
         initViews()
     }
 
     private fun initViews() {
-
+        binding.tvTitle.text = forecastViewModel.getTemp().toString()
     }
 
 }

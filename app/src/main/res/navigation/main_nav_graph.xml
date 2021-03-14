@@ -5,16 +5,16 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/fragment_welcome">
 
-    <action
-        android:id="@+id/action_welcome_to_locations"
-        app:destination="@id/fragment_locations"
-        app:popUpTo="@layout/fragment_welcome"/>
-
     <fragment
         android:id="@+id/fragment_welcome"
         android:name="com.example.weatherappthesis.welcome.WelcomeFragment"
         android:label="WelcomeFragment"
-        tools:layout="@layout/fragment_welcome"/>
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcome_to_locations"
+            app:destination="@id/fragment_locations"
+            app:popUpTo="@layout/fragment_welcome"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_locations"

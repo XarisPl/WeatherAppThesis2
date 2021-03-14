@@ -4,14 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherappthesis.R
 import com.example.weatherappthesis.databinding.FragmentDetailsBinding
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class DetailsFragment : Fragment() {
+class DetailsFragment : DaggerFragment(), HasAndroidInjector {
 
-    private lateinit var detailsViewModel: DetailsViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = fragmentInjector
+
+    private val detailsViewModel: DetailsViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(DetailsViewModel::class.java)
+    }
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +42,6 @@ class DetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        detailsViewModel = DetailsViewModel()
         detailsViewModel.setData(arguments?.getParcelable("response"))
         initViews()
         initListeners()

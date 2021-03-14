@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherappthesis.ApiResponse
 import com.example.weatherappthesis.Constants.Companion.LOCATION_1_LAT
@@ -23,10 +22,24 @@ import com.example.weatherappthesis.Constants.Companion.LOCATION_6_LAT
 import com.example.weatherappthesis.Constants.Companion.LOCATION_6_LON
 import com.example.weatherappthesis.R
 import com.example.weatherappthesis.databinding.FragmentLocationsBinding
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class LocationsFragment : Fragment() {
+class LocationsFragment : DaggerFragment(), HasAndroidInjector {
 
-    private lateinit var locationsViewModel: LocationsViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = fragmentInjector
+
+    private val locationsViewModel: LocationsViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(LocationsViewModel::class.java)
+    }
 
     private var _binding: FragmentLocationsBinding? = null
     private val binding get() = _binding!!
@@ -43,7 +56,6 @@ class LocationsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        locationsViewModel = LocationsViewModel()
         initViews()
         initListeners()
         initObservers()

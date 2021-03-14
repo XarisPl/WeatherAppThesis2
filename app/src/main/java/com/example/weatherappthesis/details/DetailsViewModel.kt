@@ -2,8 +2,9 @@ package com.example.weatherappthesis.details
 
 import androidx.lifecycle.ViewModel
 import com.example.weatherappthesis.model.StormGlassResponse
+import javax.inject.Inject
 
-class DetailsViewModel : ViewModel() {
+class DetailsViewModel @Inject constructor() : ViewModel() {
 
     private var data: StormGlassResponse? = null
 
