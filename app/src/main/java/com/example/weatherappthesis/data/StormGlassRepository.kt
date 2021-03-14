@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherappthesis.ApiResponse
 import com.example.weatherappthesis.BuildConfig
-import com.example.weatherappthesis.Constants.Companion.EMPTY
-import com.example.weatherappthesis.OpenWeatherApi
 import com.example.weatherappthesis.model.*
 import com.example.weatherappthesis.network.StormGlassApi
 import kotlinx.coroutines.GlobalScope
@@ -13,8 +11,11 @@ import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class StormGlassRepository(private val api: StormGlassApi) {
+@Singleton
+class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
 
     companion object {
         private const val HTTP_STATUS_OK = 200
@@ -23,6 +24,14 @@ class StormGlassRepository(private val api: StormGlassApi) {
         private const val PARAM_LIST = "airTemperature,waveHeight,wavePeriod,windDirection,windSpeed"
         private const val SG_SOURCE_KEY = "sg"
     }
+
+    private var temp = 0
+
+    fun setTemp(number: Int) {
+        temp = number
+    }
+
+    fun getTemp() = temp
 
     fun getWeather(lat: String, lon:String, name: String, isMocked: Boolean = false): LiveData<ApiResponse<StormGlassResponse>> {
         val result = MutableLiveData<ApiResponse<StormGlassResponse>>()

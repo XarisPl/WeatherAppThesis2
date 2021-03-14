@@ -6,19 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.example.weatherappthesis.ApiResponse
 import com.example.weatherappthesis.data.StormGlassRepository
 import com.example.weatherappthesis.model.*
-import com.example.weatherappthesis.network.StormGlassApiManager
+import javax.inject.Inject
 
-class LocationsViewModel : ViewModel() {
+class LocationsViewModel @Inject constructor(private val stormGlassRepository: StormGlassRepository) : ViewModel() {
 
     private val _stormGlassResponse = MediatorLiveData<ApiResponse<StormGlassResponse>>()
     val stormGlassResponse: LiveData<ApiResponse<StormGlassResponse>> = _stormGlassResponse
-
-    private val stormGlassApiManager = StormGlassApiManager()
-
-    private val stormGlassApi = stormGlassApiManager.getService()
-
-    private val stormGlassRepository: StormGlassRepository =
-        StormGlassRepository(stormGlassApi)
 
     fun fetchWeather(lat: String, lon: String, name: String) {
         _stormGlassResponse.addSource(

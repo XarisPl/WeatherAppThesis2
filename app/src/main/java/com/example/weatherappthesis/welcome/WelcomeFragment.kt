@@ -4,12 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherappthesis.R
 import com.example.weatherappthesis.databinding.FragmentWelcomeBinding
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class WelcomeFragment : Fragment() {
+class WelcomeFragment : DaggerFragment(), HasAndroidInjector {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = fragmentInjector
+
+    private val welcomeViewModel: WelcomeViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(WelcomeViewModel::class.java)
+    }
 
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
