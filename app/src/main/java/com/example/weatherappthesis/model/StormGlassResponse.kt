@@ -1,52 +1,63 @@
 package com.example.weatherappthesis.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+import java.lang.Exception
 
 @Parcelize
-class StormGlassResponse : Parcelable {
-    var locationName: String? = null
-    @SerializedName("hours")
-    var hours: Collection<Hours>? = null
+data class StormGlassResponse(
+    var locationName: String? = null,
+    var hoursList: @RawValue ArrayList<Hour> = arrayListOf()
+) : Parcelable {
+
+    constructor(response: StormGlassRawResponse?) : this() {
+        if (response == null) return
+        val rawHoursList = response.hours as ArrayList
+        val tempHoursList = arrayListOf<Hour>()
+        rawHoursList.forEach { rawHour ->
+            tempHoursList.add(Hour(rawHour))
+        }
+        locationName = response.locationName
+        hoursList = tempHoursList
+    }
+
 }
 
-class Hours {
-    @SerializedName("time")
-    var time: String? = null
-    @SerializedName("airTemperature")
-    var airTemperature: AirTemperature? = null
-    @SerializedName("waveHeight")
-    var waveHeight: WaveHeight? = null
-    @SerializedName("wavePeriod")
-    var wavePeriod: WavePeriod? = null
-    @SerializedName("windDirection")
-    var windDirection: WindDirection? = null
-    @SerializedName("windSpeed")
-    var windSpeed: WindSpeed? = null
-}
-
-class AirTemperature {
-    @SerializedName("sg")
-    var sg: String? = null
-}
-
-class WaveHeight {
-    @SerializedName("sg")
-    var sg: String? = null
-}
-
-class WavePeriod {
-    @SerializedName("sg")
-    var sg: String? = null
-}
-
-class WindDirection {
-    @SerializedName("sg")
-    var sg: String? = null
-}
-
-class WindSpeed {
-    @SerializedName("sg")
-    var sg: String? = null
+data class Hour(
+    var time: String? = null,
+    var airTemperature: Double? = null,
+    var waveHeight: Double? = null,
+    var wavePeriod: Double? = null,
+    var windDirection: Double? = null,
+    var windSpeed: Double? = null
+) {
+    constructor(raw: HoursRaw) : this() {
+        time = raw.time
+        try {
+            airTemperature = raw.airTemperatureRaw?.sg?.toDouble()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            waveHeight = raw.waveHeightRaw?.sg?.toDouble()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            wavePeriod = raw.wavePeriodRaw?.sg?.toDouble()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            windDirection = raw.windDirectionRaw?.sg?.toDouble()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            windSpeed = raw.windSpeedRaw?.sg?.toDouble()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

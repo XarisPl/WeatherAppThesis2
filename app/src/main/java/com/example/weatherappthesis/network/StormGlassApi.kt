@@ -1,6 +1,6 @@
 package com.example.weatherappthesis.network
 
-import com.example.weatherappthesis.model.StormGlassResponse
+import com.example.weatherappthesis.model.StormGlassRawResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -18,5 +18,5 @@ interface StormGlassApi {
         @Query("end") end: String,
         @Query("source") source: String,
     ):
-            Call<StormGlassResponse>
+            Call<StormGlassRawResponse>
 }

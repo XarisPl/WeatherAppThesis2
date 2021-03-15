@@ -6,7 +6,7 @@ import com.example.weatherappthesis.MainViewModel
 import com.example.weatherappthesis.dagger.annotations.ViewModelKey
 import com.example.weatherappthesis.details.DetailsViewModel
 import com.example.weatherappthesis.forecast.ForecastViewModel
-import com.example.weatherappthesis.location.LocationsViewModel
+import com.example.weatherappthesis.locations.LocationsViewModel
 import com.example.weatherappthesis.welcome.WelcomeViewModel
 import dagger.Binds
 import dagger.Module
