@@ -7,11 +7,13 @@ sealed class ApiResponse<T> {
     data class Canceled<T>(var message: String?) : ApiResponse<T>()
 
     companion object {
-        fun <T> loading(isLoading: Boolean, message: String?): ApiResponse<T> = Loading(isLoading, message)
+        fun <T> loading(isLoading: Boolean, message: String?): ApiResponse<T> =
+            Loading(isLoading, message)
 
         fun <T> success(data: T?, message: String? = null): ApiResponse<T> = Success(data, message)
 
-        fun <T> error(errorCode: Int = 0, errorMessage: String? = null): ApiResponse<T> = Error(errorCode, errorMessage)
+        fun <T> error(errorCode: Int = 0, errorMessage: String? = null): ApiResponse<T> =
+            Error(errorCode, errorMessage)
 
         fun <T> cancelled(message: String? = null): ApiResponse<T> = Canceled(message)
     }

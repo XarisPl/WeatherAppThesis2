@@ -14,6 +14,8 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
         data = response
     }
 
+    fun getData() = data
+
     fun getLocationName() = data?.locationName
 
     fun getAirTemperatureString() = data?.hoursList?.get(0)?.airTemperature?.let { getTemp(it) }

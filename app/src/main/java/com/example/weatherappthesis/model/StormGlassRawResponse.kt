@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class StormGlassRawResponse : Parcelable {
     var locationName: String? = null
+
     @SerializedName("hours")
     var hours: Collection<HoursRaw>? = null
 }
@@ -14,14 +15,19 @@ class StormGlassRawResponse : Parcelable {
 class HoursRaw {
     @SerializedName("time")
     var time: String? = null
+
     @SerializedName("airTemperature")
     var airTemperatureRaw: AirTemperatureRaw? = null
+
     @SerializedName("waveHeight")
     var waveHeightRaw: WaveHeightRaw? = null
+
     @SerializedName("wavePeriod")
     var wavePeriodRaw: WavePeriodRaw? = null
+
     @SerializedName("windDirection")
     var windDirectionRaw: WindDirectionRaw? = null
+
     @SerializedName("windSpeed")
     var windSpeedRaw: WindSpeedRaw? = null
 }

@@ -8,7 +8,8 @@ import com.example.weatherappthesis.data.StormGlassRepository
 import com.example.weatherappthesis.model.*
 import javax.inject.Inject
 
-class LocationsViewModel @Inject constructor(private val stormGlassRepository: StormGlassRepository) : ViewModel() {
+class LocationsViewModel @Inject constructor(private val stormGlassRepository: StormGlassRepository) :
+    ViewModel() {
 
     private val _stormGlassResponse = MediatorLiveData<ApiResponse<StormGlassResponse>>()
     val stormGlassResponse: LiveData<ApiResponse<StormGlassResponse>> = _stormGlassResponse

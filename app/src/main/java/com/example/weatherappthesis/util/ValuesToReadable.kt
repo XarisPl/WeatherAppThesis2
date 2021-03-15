@@ -19,3 +19,13 @@ fun getBF(temp: Double): String {
     val string = temp.toString()
     return "Wind speed: $string" + "BF"
 }
+
+fun getDegrees(temp: Double): String {
+    val string = temp.toString()
+    return "Wind direction: $string\u00B0"
+}
+
+fun getHour(temp: String): String {
+    val result = temp.subSequence(11, 16)
+    return result.toString()
+}
