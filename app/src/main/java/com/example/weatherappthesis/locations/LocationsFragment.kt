@@ -1,4 +1,4 @@
-package com.example.weatherappthesis.location
+package com.example.weatherappthesis.locations
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -12,19 +12,18 @@
         tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcome_to_locations"
-            app:destination="@id/fragment_locations"
-            app:popUpTo="@layout/fragment_welcome"/>
+            app:destination="@id/fragment_locations"/>
     </fragment>
 
     <fragment
         android:id="@+id/fragment_locations"
-        android:name="com.example.weatherappthesis.location.LocationsFragment"
+        android:name="com.example.weatherappthesis.locations.LocationsFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_locations">
         <action
             android:id="@+id/action_locations_to_details"
             app:destination="@id/fragment_details"
-            app:popUpTo="@layout/fragment_locations"/>
+            app:popUpTo="@id/fragment_welcome"/>
     </fragment>
 
     <fragment
@@ -37,8 +36,7 @@
             app:argType="com.example.weatherappthesis.model.StormGlassResponse"/>
         <action
             android:id="@+id/action_details_to_forecast"
-            app:destination="@id/fragment_forecast"
-            app:popUpTo="@layout/fragment_details"/>
+            app:destination="@id/fragment_forecast"/>
     </fragment>
 
     <fragment

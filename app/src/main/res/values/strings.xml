@@ -13,7 +13,10 @@
 
     <string name="forecast24">24h Forecast</string>
 
-
+    <string name="messageEasy">This is a message which explains to the user, that the conditions are easy to kayak</string>
+    <string name="messageModerate">This is a message which explains to the user, that the conditions are moderate to kayak</string>
+    <string name="messageAdvanced">This is a message which explains to the user, that the conditions are advanced to kayak</string>
+    <string name="messageExtreme">This is a message which explains to the user, that the conditions are extreme to kayak</string>
 
 
     <string name="empty">-</string>

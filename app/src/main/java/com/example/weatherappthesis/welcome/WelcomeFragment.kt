@@ -43,11 +43,20 @@ class WelcomeFragment : DaggerFragment(), HasAndroidInjector {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initListeners()
+        initView()
+    }
+
+    private fun initView() {
+        binding.scMocked.isChecked = welcomeViewModel.getIsMocked()
     }
 
     private fun initListeners() {
         binding.btLocation.setOnClickListener {
             findNavController().navigate(R.id.action_welcome_to_locations)
+        }
+
+        binding.scMocked.setOnCheckedChangeListener { _, isChecked ->
+            welcomeViewModel.switchMockedResponse(isChecked)
         }
     }
 

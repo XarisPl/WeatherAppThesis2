@@ -27,13 +27,21 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
 
     private var temp = 0
 
+    private var isMocked = false
+
     fun setTemp(number: Int) {
         temp = number
     }
 
     fun getTemp() = temp
 
-    fun getWeather(lat: String, lon:String, name: String, isMocked: Boolean = false): LiveData<ApiResponse<StormGlassResponse>> {
+    fun switchMockedResponse(isMocked: Boolean) {
+        this.isMocked = isMocked
+    }
+
+    fun getMockedStatus() = isMocked
+
+    fun getWeather(lat: String, lon:String, name: String): LiveData<ApiResponse<StormGlassResponse>> {
         val result = MutableLiveData<ApiResponse<StormGlassResponse>>()
 
         if (isMocked) {
@@ -57,7 +65,8 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
                     HTTP_STATUS_OK, HTTP_STATUS_CREATED -> {
                         val body = apiResponse.body()
                         body?.locationName = name
-                        result.postValue(ApiResponse.success(body))
+                        val usableResponse = StormGlassResponse(body)
+                        result.postValue(ApiResponse.success(usableResponse))
                     }
                     else -> {
                         result.postValue(
@@ -80,48 +89,48 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
     }
 
     private fun createMockedResponse(name: String): StormGlassResponse {
-        val mockedResponse = StormGlassResponse()
-        val mockedHours = arrayListOf<Hours>()
-        val airTemp1 = AirTemperature()
+        val mockedResponse = StormGlassRawResponse()
+        val mockedHours = arrayListOf<HoursRaw>()
+        val airTemp1 = AirTemperatureRaw()
         airTemp1.sg = "2.2"
-        val waveHeight1 = WaveHeight()
-        waveHeight1.sg = "2.2"
-        val wavePeriod1 = WavePeriod()
-        wavePeriod1.sg = "2.2"
-        val windDirection1 = WindDirection()
+        val waveHeight1 = WaveHeightRaw()
+        waveHeight1.sg = "0.7"
+        val wavePeriod1 = WavePeriodRaw()
+        wavePeriod1.sg = "9.5"
+        val windDirection1 = WindDirectionRaw()
         windDirection1.sg = "2.2"
-        val windSpeed1 = WindSpeed()
-        windSpeed1.sg = "2.2"
-        val hour1 = Hours()
-        hour1.airTemperature = airTemp1
-        hour1.waveHeight = waveHeight1
-        hour1.wavePeriod = wavePeriod1
-        hour1.windDirection = windDirection1
-        hour1.windSpeed = windSpeed1
+        val windSpeed1 = WindSpeedRaw()
+        windSpeed1.sg = "4.1"
+        val hour1 = HoursRaw()
+        hour1.airTemperatureRaw = airTemp1
+        hour1.waveHeightRaw = waveHeight1
+        hour1.wavePeriodRaw = wavePeriod1
+        hour1.windDirectionRaw = windDirection1
+        hour1.windSpeedRaw = windSpeed1
 
 
-        val airTemp2 = AirTemperature()
+        val airTemp2 = AirTemperatureRaw()
         airTemp2.sg = "2.2"
-        val waveHeight2 = WaveHeight()
+        val waveHeight2 = WaveHeightRaw()
         waveHeight2.sg = "2.2"
-        val wavePeriod2 = WavePeriod()
-        wavePeriod2.sg = "2.2"
-        val windDirection2 = WindDirection()
+        val wavePeriod2 = WavePeriodRaw()
+        wavePeriod2.sg = "12.4"
+        val windDirection2 = WindDirectionRaw()
         windDirection2.sg = "2.2"
-        val windSpeed2 = WindSpeed()
-        windSpeed2.sg = "2.2"
-        val hour2 = Hours()
-        hour2.airTemperature = airTemp2
-        hour2.waveHeight = waveHeight2
-        hour2.wavePeriod = wavePeriod2
-        hour2.windDirection = windDirection2
-        hour2.windSpeed = windSpeed2
+        val windSpeed2 = WindSpeedRaw()
+        windSpeed2.sg = "7.3"
+        val hour2 = HoursRaw()
+        hour2.airTemperatureRaw = airTemp2
+        hour2.waveHeightRaw = waveHeight2
+        hour2.wavePeriodRaw = wavePeriod2
+        hour2.windDirectionRaw = windDirection2
+        hour2.windSpeedRaw = windSpeed2
 
         mockedHours.add(hour1)
         mockedHours.add(hour2)
         mockedResponse.hours = mockedHours
         mockedResponse.locationName = name
-        return mockedResponse
+        return StormGlassResponse(mockedResponse)
     }
 
 }

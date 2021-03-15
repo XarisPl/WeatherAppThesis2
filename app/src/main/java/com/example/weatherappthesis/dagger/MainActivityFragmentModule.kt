@@ -3,7 +3,7 @@ package com.example.weatherappthesis.dagger
 import com.example.weatherappthesis.dagger.annotations.FragmentScope
 import com.example.weatherappthesis.details.DetailsFragment
 import com.example.weatherappthesis.forecast.ForecastFragment
-import com.example.weatherappthesis.location.LocationsFragment
+import com.example.weatherappthesis.locations.LocationsFragment
 import com.example.weatherappthesis.welcome.WelcomeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

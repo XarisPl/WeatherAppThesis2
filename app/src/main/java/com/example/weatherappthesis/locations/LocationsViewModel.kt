@@ -1,4 +1,4 @@
-package com.example.weatherappthesis.location
+package com.example.weatherappthesis.locations
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -15,7 +15,7 @@ class LocationsViewModel @Inject constructor(private val stormGlassRepository: S
 
     fun fetchWeather(lat: String, lon: String, name: String) {
         _stormGlassResponse.addSource(
-            stormGlassRepository.getWeather(lat, lon, name, true)
+            stormGlassRepository.getWeather(lat, lon, name)
         ) {
             _stormGlassResponse.value = it
         }
