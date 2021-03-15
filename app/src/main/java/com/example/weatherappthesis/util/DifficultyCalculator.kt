@@ -37,19 +37,19 @@ fun calculate(data: StormGlassResponse): Difficulty {
 
 private fun isEasy(hour: Hour): Boolean {
     return hour.waveHeight!! < 0.5 &&
-    hour.wavePeriod!! < 8 &&
-    hour.windSpeed!! <= 3
+            hour.wavePeriod!! < 8 &&
+            hour.windSpeed!! <= 3
 }
 
 private fun isModerate(hour: Hour): Boolean {
     return (hour.waveHeight!! > 0.5 && hour.waveHeight!! < 1) &&
-            (hour.wavePeriod!! > 8 &&hour.wavePeriod!! < 10) &&
+            (hour.wavePeriod!! > 8 && hour.wavePeriod!! < 10) &&
             hour.windSpeed!! > 3 && hour.windSpeed!! <= 5
 }
 
 private fun isAdvanced(hour: Hour): Boolean {
     return (hour.waveHeight!! > 1 && hour.waveHeight!! < 1.7) &&
-            (hour.wavePeriod!! > 8 &&hour.wavePeriod!! < 10) &&
+            (hour.wavePeriod!! > 8 && hour.wavePeriod!! < 10) &&
             hour.windSpeed!! > 5 && hour.windSpeed!! <= 7
 }
 

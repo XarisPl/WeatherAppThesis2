@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherappthesis.adapter.ForecastHourAdapter
 import com.example.weatherappthesis.databinding.FragmentForecastBinding
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -28,6 +30,9 @@ class ForecastFragment : DaggerFragment(), HasAndroidInjector {
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: ForecastHourAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,11 +45,20 @@ class ForecastFragment : DaggerFragment(), HasAndroidInjector {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        forecastViewModel.setData(arguments?.getParcelable("forecast"))
         initViews()
+        initAdapter()
     }
 
     private fun initViews() {
-        binding.tvTitle.text = forecastViewModel.getTemp().toString()
+        linearLayoutManager = LinearLayoutManager(requireContext())
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.rvInfo.layoutManager = linearLayoutManager
+    }
+
+    private fun initAdapter() {
+        adapter = forecastViewModel.getData()?.hoursList?.let { ForecastHourAdapter(it) }!!
+        binding.rvInfo.adapter = adapter
     }
 
 }

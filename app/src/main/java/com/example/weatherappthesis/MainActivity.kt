@@ -62,8 +62,6 @@ class MainActivity : DaggerAppCompatActivity(), HasAndroidInjector {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
         askForLocationPermissions()
-
-        mainViewModel.setTemp(1)
     }
 
     private fun askForLocationPermissions() {

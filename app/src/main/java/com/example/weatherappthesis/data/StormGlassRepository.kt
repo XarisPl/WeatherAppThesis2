@@ -21,19 +21,12 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
         private const val HTTP_STATUS_OK = 200
         private const val HTTP_STATUS_CREATED = 201
         private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
-        private const val PARAM_LIST = "airTemperature,waveHeight,wavePeriod,windDirection,windSpeed"
+        private const val PARAM_LIST =
+            "airTemperature,waveHeight,wavePeriod,windDirection,windSpeed"
         private const val SG_SOURCE_KEY = "sg"
     }
 
-    private var temp = 0
-
     private var isMocked = false
-
-    fun setTemp(number: Int) {
-        temp = number
-    }
-
-    fun getTemp() = temp
 
     fun switchMockedResponse(isMocked: Boolean) {
         this.isMocked = isMocked
@@ -41,7 +34,11 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
 
     fun getMockedStatus() = isMocked
 
-    fun getWeather(lat: String, lon:String, name: String): LiveData<ApiResponse<StormGlassResponse>> {
+    fun getWeather(
+        lat: String,
+        lon: String,
+        name: String
+    ): LiveData<ApiResponse<StormGlassResponse>> {
         val result = MutableLiveData<ApiResponse<StormGlassResponse>>()
 
         if (isMocked) {
@@ -60,7 +57,15 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
 
         GlobalScope.launch {
             try {
-                val apiResponse = api.getWeather(BuildConfig.STORM_GLASS_API_KEY, lat, lon, listOf(PARAM_LIST), startDate, endDate, SG_SOURCE_KEY).awaitResponse()
+                val apiResponse = api.getWeather(
+                    BuildConfig.STORM_GLASS_API_KEY,
+                    lat,
+                    lon,
+                    listOf(PARAM_LIST),
+                    startDate,
+                    endDate,
+                    SG_SOURCE_KEY
+                ).awaitResponse()
                 when (apiResponse.code()) {
                     HTTP_STATUS_OK, HTTP_STATUS_CREATED -> {
                         val body = apiResponse.body()
@@ -102,6 +107,7 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
         val windSpeed1 = WindSpeedRaw()
         windSpeed1.sg = "4.1"
         val hour1 = HoursRaw()
+        hour1.time = "2021-03-07T12:00:00+00:00"
         hour1.airTemperatureRaw = airTemp1
         hour1.waveHeightRaw = waveHeight1
         hour1.wavePeriodRaw = wavePeriod1
@@ -120,17 +126,79 @@ class StormGlassRepository @Inject constructor(private val api: StormGlassApi) {
         val windSpeed2 = WindSpeedRaw()
         windSpeed2.sg = "7.3"
         val hour2 = HoursRaw()
+        hour2.time = "2021-03-07T13:00:00+00:00"
         hour2.airTemperatureRaw = airTemp2
         hour2.waveHeightRaw = waveHeight2
         hour2.wavePeriodRaw = wavePeriod2
         hour2.windDirectionRaw = windDirection2
         hour2.windSpeedRaw = windSpeed2
 
+        val airTemp3 = AirTemperatureRaw()
+        airTemp3.sg = "4.2"
+        val waveHeight3 = WaveHeightRaw()
+        waveHeight3.sg = "3.2"
+        val wavePeriod3 = WavePeriodRaw()
+        wavePeriod3.sg = "15.4"
+        val windDirection3 = WindDirectionRaw()
+        windDirection3.sg = "1.2"
+        val windSpeed3 = WindSpeedRaw()
+        windSpeed3.sg = "8.3"
+        val hour3 = HoursRaw()
+        hour3.time = "2021-03-07T14:00:00+00:00"
+        hour3.airTemperatureRaw = airTemp2
+        hour3.waveHeightRaw = waveHeight2
+        hour3.wavePeriodRaw = wavePeriod2
+        hour3.windDirectionRaw = windDirection2
+        hour3.windSpeedRaw = windSpeed2
+
+        val airTemp4 = AirTemperatureRaw()
+        airTemp4.sg = "3.6"
+        val waveHeight4 = WaveHeightRaw()
+        waveHeight4.sg = "2.2"
+        val wavePeriod4 = WavePeriodRaw()
+        wavePeriod4.sg = "12.4"
+        val windDirection4 = WindDirectionRaw()
+        windDirection4.sg = "2.2"
+        val windSpeed4 = WindSpeedRaw()
+        windSpeed4.sg = "7.3"
+        val hour4 = HoursRaw()
+        hour4.time = "2021-03-07T15:00:00+00:00"
+        hour4.airTemperatureRaw = airTemp2
+        hour4.waveHeightRaw = waveHeight2
+        hour4.wavePeriodRaw = wavePeriod2
+        hour4.windDirectionRaw = windDirection2
+        hour4.windSpeedRaw = windSpeed2
+
+        val airTemp5 = AirTemperatureRaw()
+        airTemp5.sg = "2.2"
+        val waveHeight5 = WaveHeightRaw()
+        waveHeight5.sg = "2.2"
+        val wavePeriod5 = WavePeriodRaw()
+        wavePeriod5.sg = "12.4"
+        val windDirection5 = WindDirectionRaw()
+        windDirection5.sg = "2.2"
+        val windSpeed5 = WindSpeedRaw()
+        windSpeed5.sg = "7.3"
+        val hour5 = HoursRaw()
+        hour5.time = "2021-03-07T16:00:00+00:00"
+        hour5.airTemperatureRaw = airTemp2
+        hour5.waveHeightRaw = waveHeight2
+        hour5.wavePeriodRaw = wavePeriod2
+        hour5.windDirectionRaw = windDirection2
+        hour5.windSpeedRaw = windSpeed2
+
         mockedHours.add(hour1)
         mockedHours.add(hour2)
+        mockedHours.add(hour3)
+        mockedHours.add(hour4)
+        mockedHours.add(hour5)
+        mockedHours.add(hour1)
+        mockedHours.add(hour2)
+        mockedHours.add(hour3)
+        mockedHours.add(hour4)
+        mockedHours.add(hour5)
         mockedResponse.hours = mockedHours
         mockedResponse.locationName = name
         return StormGlassResponse(mockedResponse)
     }
-
 }

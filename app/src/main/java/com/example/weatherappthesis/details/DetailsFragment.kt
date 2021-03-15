@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherappthesis.R
@@ -62,13 +63,21 @@ class DetailsFragment : DaggerFragment(), HasAndroidInjector {
 
     private fun initListeners() {
         binding.btForecast24.setOnClickListener {
-            findNavController().navigate(R.id.action_details_to_forecast)
+            val bundle = bundleOf("forecast" to detailsViewModel.getData())
+            findNavController().navigate(R.id.action_details_to_forecast, bundle)
         }
     }
 
     private fun adjustViewBasedOnDifficulty(difficulty: Difficulty?) {
         if (difficulty != null) {
-            difficulty.colourId?.let { cl_details.setBackgroundColor(ContextCompat.getColor(requireContext(), it)) }
+            difficulty.colourId?.let {
+                cl_details.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        it
+                    )
+                )
+            }
             binding.tvDifficulty.text = difficulty.level?.title
             binding.tvMessage.text = difficulty.messageId?.let { getString(it) }
         }

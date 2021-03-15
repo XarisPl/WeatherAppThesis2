@@ -80,27 +80,51 @@ class LocationsFragment : DaggerFragment(), HasAndroidInjector {
     private fun initListeners() {
         binding.btLocation1.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_1_LAT, LOCATION_1_LON, getString(R.string.location1))
+            locationsViewModel.fetchWeather(
+                LOCATION_1_LAT,
+                LOCATION_1_LON,
+                getString(R.string.location1)
+            )
         }
         binding.btLocation2.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_2_LAT, LOCATION_2_LON, getString(R.string.location2))
+            locationsViewModel.fetchWeather(
+                LOCATION_2_LAT,
+                LOCATION_2_LON,
+                getString(R.string.location2)
+            )
         }
         binding.btLocation3.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_3_LAT, LOCATION_3_LON, getString(R.string.location3))
+            locationsViewModel.fetchWeather(
+                LOCATION_3_LAT,
+                LOCATION_3_LON,
+                getString(R.string.location3)
+            )
         }
         binding.btLocation4.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_4_LAT, LOCATION_4_LON, getString(R.string.location4))
+            locationsViewModel.fetchWeather(
+                LOCATION_4_LAT,
+                LOCATION_4_LON,
+                getString(R.string.location4)
+            )
         }
         binding.btLocation5.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_5_LAT, LOCATION_5_LON, getString(R.string.location5))
+            locationsViewModel.fetchWeather(
+                LOCATION_5_LAT,
+                LOCATION_5_LON,
+                getString(R.string.location5)
+            )
         }
         binding.btLocation6.setOnClickListener {
             setSpinnerVisibility(true)
-            locationsViewModel.fetchWeather(LOCATION_6_LAT, LOCATION_6_LON, getString(R.string.location6))
+            locationsViewModel.fetchWeather(
+                LOCATION_6_LAT,
+                LOCATION_6_LON,
+                getString(R.string.location6)
+            )
         }
     }
 
