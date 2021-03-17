@@ -36,7 +36,7 @@ class ForecastHourAdapter(private val hoursList: ArrayList<Hour>) :
             itemView.tv_wave_height.text = hour.waveHeight?.let { getHeight(it) }
             itemView.tv_wave_period.text = hour.wavePeriod?.let { getSeconds(it) }
             itemView.tv_wind_speed.text = hour.windSpeed?.let { getBF(it) }
-            itemView.tv_wind_direction.text = hour.windDirection?.let { getDegrees(it) }
+            itemView.tv_wind_direction.text = hour.windDirection?.let { getWind(it) }
         }
 
     }

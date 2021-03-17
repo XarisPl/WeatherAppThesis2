@@ -25,9 +25,9 @@ fun getBF(windSpeed: Double, windDirection: Double? = null): String {
     }
 }
 
-fun getDegrees(temp: Double): String {
-    val string = temp.toString()
-    return "Wind direction: $string\u00B0" + getWindDirection(temp)
+fun getWind(temp: Double): String {
+    val string = getWindDirection(temp)
+    return "Wind direction: $string"
 }
 
 fun getHour(temp: String): String {
