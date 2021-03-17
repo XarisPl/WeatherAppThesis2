@@ -24,7 +24,7 @@ class DetailsViewModel @Inject constructor() : ViewModel() {
 
     fun getWavePeriodString() = data?.hoursList?.get(0)?.wavePeriod?.let { getSeconds(it) }
 
-    fun getWindSpeedString() = data?.hoursList?.get(0)?.windSpeed?.let { getBF(it) }
+    fun getWindSpeedString() = data?.hoursList?.get(0)?.windSpeed?.let { getBF(it, data?.hoursList?.get(0)?.windDirection) }
 
     fun calculateDifficulty() = data?.let { calculate(it) }
 }
